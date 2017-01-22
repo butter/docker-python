@@ -1,7 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
--	[`2.7.13`, `2.7`, `2` (*2.7/Dockerfile*)](https://github.com/butter/docker-python/blob/a248f4583c5f788e1af02016f762cdc323ee5765/2.7/Dockerfile)
--	[`3.6.0`, `3.6`, `3`, `latest` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/7eca63adca38729424a9bab957f006f5caad870f/3.6/Dockerfile)
+-	[`2.7.13`, `2.7`, `2` (*2.7/Dockerfile*)](https://github.com/butter/docker-python/blob/ef2f8127358369ffc06c62a851d776188d084b78/2.7/Dockerfile)
+-	[`3.6.0`, `3.6`, `3`, `latest` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/ef2f8127358369ffc06c62a851d776188d084b78/3.6/Dockerfile)
 
 # What is Python?
 
