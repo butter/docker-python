@@ -1,4 +1,4 @@
-FROM python:3.6.0
+FROM python:3.6.1
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
