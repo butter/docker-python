@@ -12,6 +12,10 @@ RUN set -x \
  && chmod +x /usr/local/bin/gosu \
  && gosu nobody true
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    vim.tiny \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 RUN groupadd -r butter && useradd -r -g butter butter
 
 RUN mkdir -p /usr/src/app
