@@ -1,7 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
--	[`2.7.13`, `2.7`, `2` (*2.7/Dockerfile*)](https://github.com/butter/docker-python/blob/ef2f8127358369ffc06c62a851d776188d084b78/2.7/Dockerfile)
--	[`3.6.0`, `3.6`, `3`, `latest` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/ef2f8127358369ffc06c62a851d776188d084b78/3.6/Dockerfile)
+-	[`2.7.13`, `2.7`, `2` (*2.7/Dockerfile*)](https://github.com/butter/docker-python/blob/875b175bd55a21b2d557bc99391e6c1cfa824b17/2.7/Dockerfile)
+-	[`3.6.1`, `3.6`, `3`, `latest` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/875b175bd55a21b2d557bc99391e6c1cfa824b17/3.6/Dockerfile)
+-	[`3.6.0` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/ef2f8127358369ffc06c62a851d776188d084b78/3.6/Dockerfile)
 
 # What is Python?
 
@@ -16,7 +17,7 @@ Python is an interpreted, interactive, object-oriented, open-source programming 
 ## Create a `Dockerfile` in your Python app project
 
 ```dockerfile
-FROM butter/python:3.6.0
+FROM butter/python:3.6.1
 CMD [ "python", "./your-daemon-or-script.py" ]
 ```
 
