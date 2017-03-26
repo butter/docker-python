@@ -1,4 +1,5 @@
 FROM python:3.6.1
+MAINTAINER Butter.ai <dev@butter.ai>
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
