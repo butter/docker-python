@@ -1,5 +1,5 @@
 FROM python:2.7.13
-MAINTAINER Butter.ai <dev@butter.ai>
+LABEL maintainer="Butter.ai <dev@butter.ai>"
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
@@ -17,7 +17,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim.tiny \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd -r butter && useradd -r -g butter butter
+RUN groupadd -r -g 999 butter \
+ && useradd -r -u 999 -g 999 butter \
+ && mkdir -p /usr/src/app /var/log/butter \
+ && chown butter:butter /usr/src/app /var/log/butter
 
-RUN mkdir -p /usr/src/app
+VOLUME /var/log/butter
+
 WORKDIR /usr/src/app
