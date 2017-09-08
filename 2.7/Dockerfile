@@ -1,8 +1,84 @@
-FROM python:2.7.13
+FROM debian:jessie
 LABEL maintainer="Butter.ai <dev@butter.ai>"
 
+ENV \
+  PATH=/usr/local/bin:$PATH \
+  LANG=C.UTF-8 \
+  GOSU_VERSION=1.10 \
+  PYTHON_VERSION=2.7.13 \
+  PYTHON_PIP_VERSION=9.0.1
+
+# Install python
+RUN set -ex; \
+    buildDeps='dpkg-dev tcl-dev tk-dev' \
+ && apt-get update && apt-get install -y --no-install-recommends \
+    bzip2 \
+    ca-certificates \
+    curl \
+    dirmngr \
+    gcc \
+    g++ \
+    gnupg2 \
+    libc6-dev \
+    libcurl4-openssl-dev \
+    libglib2.0-dev \
+    libssl-dev \
+    libxml2-dev \
+    make \
+    patch \
+    wget \
+    xz-utils \
+    zlib1g-dev \
+    $buildDeps \
+ && rm -rf /var/lib/apt/lists/* \
+ \
+ && wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
+ && wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
+ && export GNUPGHOME="$(mktemp -d)" \
+ && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF" \
+ && gpg --batch --verify python.tar.xz.asc python.tar.xz \
+ && rm -rf "$GNUPGHOME" python.tar.xz.asc \
+ && mkdir -p /usr/src/python \
+ && tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
+ && rm python.tar.xz \
+ \
+ && cd /usr/src/python \
+ && gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
+ && ./configure \
+   --build="$gnuArch" \
+   --enable-shared \
+   --enable-unicode=ucs4 \
+ && make -j "$(nproc)" \
+ && make install \
+ && ldconfig \
+ \
+ && apt-get purge -y --auto-remove $buildDeps \
+ \
+ && find /usr/local -depth \
+   \( \
+     \( -type d -a \( -name test -o -name tests \) \) \
+     -o \
+     \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+   \) -exec rm -rf '{}' + \
+ && rm -rf /usr/src/python
+
+# Install python pip
+RUN set -x; \
+    wget -O get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
+ \
+ && python get-pip.py --disable-pip-version-check --no-cache-dir \
+    pip==$PYTHON_PIP_VERSION \
+ && pip --version \
+ \
+ && find /usr/local -depth \
+   \( \
+     \( -type d -a \( -name test -o -name tests \) \) \
+     -o \
+     \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
+   \) -exec rm -rf '{}' + \
+ && rm -f get-pip.py
+
 # grab gosu for easy step-down from root
-ENV GOSU_VERSION 1.10
 RUN set -x \
  && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
  && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
@@ -13,10 +89,6 @@ RUN set -x \
  && chmod +x /usr/local/bin/gosu \
  && gosu nobody true
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    vim.tiny \
- && apt-get clean && rm -rf /var/lib/apt/lists/*
-
 RUN groupadd -r -g 999 butter \
  && useradd -r -u 999 -g 999 butter \
  && mkdir -p /usr/src/app /var/log/butter \
@@ -25,3 +97,5 @@ RUN groupadd -r -g 999 butter \
 VOLUME /var/log/butter
 
 WORKDIR /usr/src/app
+
+CMD ["python2"]
