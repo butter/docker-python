@@ -5,7 +5,7 @@ ENV \
   PATH=/usr/local/bin:$PATH \
   LANG=C.UTF-8 \
   GOSU_VERSION=1.10 \
-  PYTHON_VERSION=2.7.13 \
+  PYTHON_VERSION=2.7.14 \
   PYTHON_PIP_VERSION=9.0.1
 
 # Install python
@@ -19,9 +19,11 @@ RUN set -ex; \
     gcc \
     g++ \
     gnupg2 \
+    libbz2-dev \
     libc6-dev \
     libcurl4-openssl-dev \
     libglib2.0-dev \
+    libsqlite3-dev \
     libssl-dev \
     libxml2-dev \
     make \
