@@ -1,7 +1,9 @@
 # Supported tags and respective `Dockerfile` links
 
--	[`2.7.13`, `2.7`, `2` (*2.7/Dockerfile*)](https://github.com/butter/docker-python/blob/6f9909b0c74c852c456c586c120c3b4bd7ede772/2.7/Dockerfile)
--	[`3.6.2`, `3.6`, `3`, `latest` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/6f9909b0c74c852c456c586c120c3b4bd7ede772/3.6/Dockerfile)
+-	[`2.7.14`, `2.7`, `2` (*2.7/Dockerfile*)](https://github.com/butter/docker-python/blob/71de0eb8dbc21b1ba4e1001b7a86d6121e20dd05/2.7/Dockerfile)
+-	[`2.7.13` (*2.7/Dockerfile*)](https://github.com/butter/docker-python/blob/6f9909b0c74c852c456c586c120c3b4bd7ede772/2.7/Dockerfile)
+-	[`3.6.4`, `3.6`, `3`, `latest` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/71de0eb8dbc21b1ba4e1001b7a86d6121e20dd05/3.6/Dockerfile)
+-	[`3.6.2` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/6f9909b0c74c852c456c586c120c3b4bd7ede772/3.6/Dockerfile)
 -	[`3.6.1` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/55a8c8a121f8fa8814ab42586b320758f2193941/3.6/Dockerfile)
 -	[`3.6.0` (*3.6/Dockerfile*)](https://github.com/butter/docker-python/blob/ef2f8127358369ffc06c62a851d776188d084b78/3.6/Dockerfile)
 
